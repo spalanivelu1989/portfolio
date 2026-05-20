@@ -67,6 +67,13 @@ assert('nav has aria-label', html.includes('aria-label="Main navigation"'));
 assert('sections use aria-labelledby', (html.match(/aria-labelledby/g) || []).length >= 4);
 assert('logo link has aria-label containing "SP"', html.includes('aria-label="SP –'));
 
+// --- Dark mode toggle (dark-mode-spec R1, R5, R6, AC1, AC6) ---
+console.log('\nDark mode toggle');
+assert('theme toggle button present in nav', html.includes('class="nav__theme-toggle"'));
+assert('toggle has default aria-label "Switch to dark mode"', html.includes('aria-label="Switch to dark mode"'));
+assert('icon-sun SVG present in toggle knob', html.includes('class="icon-sun"'));
+assert('icon-moon SVG present in toggle knob', html.includes('class="icon-moon"'));
+
 // --- No-JS baseline (R8, AC9) ---
 console.log('\nNo-JS baseline');
 assert('script.js is at end of body (enhancement only)', html.indexOf('<script') > html.indexOf('</main>'));

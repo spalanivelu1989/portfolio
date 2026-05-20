@@ -11,6 +11,7 @@
   --color-border: #e5e7eb;
   --color-tag-bg: #eff6ff;
   --color-tag-text: #1e40af;
+  --color-nav-bg: rgba(255, 255, 255, 0.92);
 
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
@@ -26,6 +27,22 @@
 }
 
 /* ===================================================
+   Dark mode — colour token overrides
+   =================================================== */
+html[data-theme="dark"] {
+  --color-bg: #0d1117;
+  --color-bg-alt: #161b22;
+  --color-text: #e6edf3;
+  --color-text-muted: #8b949e;
+  --color-accent: #3b82f6;
+  --color-accent-hover: #60a5fa;
+  --color-border: #30363d;
+  --color-tag-bg: #1f2937;
+  --color-tag-text: #93c5fd;
+  --color-nav-bg: rgba(13, 17, 23, 0.92);
+}
+
+/* ===================================================
    Reset
    =================================================== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -36,6 +53,7 @@ body {
   color: var(--color-text);
   line-height: 1.6;
   font-size: 1rem;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 img { display: block; max-width: 100%; }
 ul[role="list"] { list-style: none; }
@@ -97,10 +115,11 @@ a { color: inherit; text-decoration: none; }
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.92);
+  background: var(--color-nav-bg);
   backdrop-filter: blur(6px);
   border-bottom: 1px solid var(--color-border);
   height: var(--nav-height);
+  transition: background 0.25s ease, border-color 0.25s ease;
 }
 
 .nav {
@@ -134,6 +153,70 @@ a { color: inherit; text-decoration: none; }
 .nav__link.is-active {
   color: var(--color-accent);
 }
+
+.nav__theme-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+  line-height: 0;
+}
+
+.toggle-track {
+  display: flex;
+  align-items: center;
+  width: 3rem;
+  height: 1.5rem;
+  background: #d1d5db;
+  border-radius: 999px;
+  padding: 3px;
+  transition: background 0.3s ease;
+}
+
+html[data-theme="dark"] .toggle-track {
+  background: var(--color-accent);
+}
+
+.toggle-knob {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.125rem;
+  height: 1.125rem;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease;
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+html[data-theme="dark"] .toggle-knob {
+  transform: translateX(1.5rem);
+  color: var(--color-accent);
+}
+
+.nav__theme-toggle:hover .toggle-track {
+  background: #9ca3af;
+}
+
+html[data-theme="dark"] .nav__theme-toggle:hover .toggle-track {
+  background: var(--color-accent-hover);
+}
+
+.nav__theme-toggle:active .toggle-knob {
+  transform: translateX(0.25rem);
+}
+
+html[data-theme="dark"] .nav__theme-toggle:active .toggle-knob {
+  transform: translateX(1.25rem);
+}
+
+/* Icon visibility driven by CSS — avoids SVG hidden-attribute cross-browser issues */
+.icon-moon { display: none; }
+html[data-theme="dark"] .icon-moon { display: block; }
+html[data-theme="dark"] .icon-sun  { display: none; }
 
 /* ===================================================
    Hero (T6)

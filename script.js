@@ -35,4 +35,18 @@
   sections.forEach(function (section) {
     observer.observe(section);
   });
+
+  var themeToggle = document.querySelector('.nav__theme-toggle');
+  if (themeToggle) {
+    themeToggle.addEventListener('click', function () {
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        document.documentElement.removeAttribute('data-theme');
+        themeToggle.setAttribute('aria-label', 'Switch to dark mode');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        themeToggle.setAttribute('aria-label', 'Switch to light mode');
+      }
+    });
+  }
 })();
