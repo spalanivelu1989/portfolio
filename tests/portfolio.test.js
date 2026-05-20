@@ -65,7 +65,7 @@ assert('skip link present', html.includes('class="skip-link"'));
 assert('main has id for skip link', html.includes('id="main-content"'));
 assert('nav has aria-label', html.includes('aria-label="Main navigation"'));
 assert('sections use aria-labelledby', (html.match(/aria-labelledby/g) || []).length >= 4);
-assert('logo link has aria-label', html.includes('aria-label="Senthil Palanivelu'));
+assert('logo link has aria-label containing "SP"', html.includes('aria-label="SP –'));
 
 // --- No-JS baseline (R8, AC9) ---
 console.log('\nNo-JS baseline');
